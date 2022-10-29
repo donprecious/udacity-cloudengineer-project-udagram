@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
-import { Link, Route, Router, Switch } from 'react-router-dom'
+import { Link, Router } from 'react-router-dom'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
+import { Routes, Route } from 'react-router-dom'
 
 import Auth from './auth/Auth'
 import { EditTodo } from './components/EditTodo'
 import { LogIn } from './components/LogIn'
 import { NotFound } from './components/NotFound'
 import { Todos } from './components/Todos'
+import { RouteComponentProps } from '@reach/router'
 
-export interface AppProps {}
+export interface AppProps extends RouteComponentProps {}
 
 export interface AppProps {
   auth: Auth
   history: any
+  match: {
+    params: {
+      todoId: string
+    }
+  }
 }
 
 export interface AppState {}
@@ -40,7 +47,10 @@ export default class App extends Component<AppProps, AppState> {
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
               <Grid.Column width={16}>
-                <Router history={this.props.history}>
+                <Router
+                  location={this.props.history.location}
+                  navigator={this.props.history}
+                >
                   {this.generateMenu()}
 
                   {this.generateCurrentPage()}
@@ -87,25 +97,26 @@ export default class App extends Component<AppProps, AppState> {
     }
 
     return (
-      <Switch>
+      <Routes>
         <Route
           path="/"
-          exact
-          render={props => {
-            return <Todos {...props} auth={this.props.auth} />
-          }}
+          // exact
+          element={<Todos {...this.props} auth={this.props.auth} />}
         />
 
         <Route
           path="/todos/:todoId/edit"
-          exact
-          render={props => {
-            return <EditTodo {...props} auth={this.props.auth} />
-          }}
+          // exact
+          element={
+            <EditTodo match={{ ...this.props.match }} auth={this.props.auth} />
+          }
+          // render={(props: any) => {
+          //   return <EditTodo {...props} auth={this.props.auth} />
+          // }}
         />
 
-        <Route component={NotFound} />
-      </Switch>
+        <Route element={<NotFound />} />
+      </Routes>
     )
   }
 }
