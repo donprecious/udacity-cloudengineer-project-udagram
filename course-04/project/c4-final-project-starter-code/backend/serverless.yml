@@ -31,7 +31,7 @@ provider:
     ATTACHMENT_S3_BUCKET: serverless-c4-udacity-pro-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     S3_BUCKET_NAME: serverless-c4-udacity-pro-${self:provider.stage}
-    
+
   logs:
     # Enable API Gateway logs
     restApi: true
