@@ -17,17 +17,17 @@ const handleAuthentication = (props: any) => {
 
 export const makeAuthRouting = () => {
   return (
-    <Router history={history}>
+    <Router location={''} navigator={history}>
       <div>
         <Route
           path="/callback"
-          render={props => {
+          render={(props) => {
             handleAuthentication(props)
             return <Callback />
           }}
         />
         <Route
-          render={props => {
+          render={(props) => {
             return <App auth={auth} {...props} />
           }}
         />

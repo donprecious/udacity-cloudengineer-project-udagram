@@ -366,6 +366,7 @@ resources:
         DisplayName: Image bucket topic
         TopicName: ${self:custom.topicName}
 
+
     # ImagesSearch:
     #   Type: AWS::Elasticsearch::Domain
     #   Properties:
