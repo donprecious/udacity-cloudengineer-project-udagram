@@ -1,11 +1,26 @@
 import React from 'react'
 import { Dimmer, Loader } from 'semantic-ui-react'
+import Auth from '../auth/Auth'
+import { createBrowserHistory, History } from 'history'
+const history = createBrowserHistory()
 
-function Callback() {
+
+const auth = new Auth(history)
+
+const handleAuthentication = (props: any) => {
+  const location = props.location
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication()
+  }
+}
+function Callback(props: any) {
   return (
-    <Dimmer active>
-      <Loader content="Loading" />
-    </Dimmer>
+    <>
+      {handleAuthentication(props)}
+      <Dimmer active>
+        <Loader content="Loading" />
+      </Dimmer>
+    </>
   )
 }
 

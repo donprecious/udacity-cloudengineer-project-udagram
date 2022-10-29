@@ -15,6 +15,11 @@ export interface AppProps extends RouteComponentProps {}
 export interface AppProps {
   auth: Auth
   history: any
+  match: {
+    params: {
+      todoId: string
+    }
+  }
 }
 
 export interface AppState {}
@@ -96,17 +101,18 @@ export default class App extends Component<AppProps, AppState> {
         <Route
           path="/"
           // exact
-          render={(props: any) => {
-            return <Todos {...props} auth={this.props.auth} />
-          }}
+          element={<Todos {...this.props} auth={this.props.auth} />}
         />
 
         <Route
           path="/todos/:todoId/edit"
           // exact
-          render={(props: any) => {
-            return <EditTodo {...props} auth={this.props.auth} />
-          }}
+          element={
+            <EditTodo match={{ ...this.props.match }} auth={this.props.auth} />
+          }
+          // render={(props: any) => {
+          //   return <EditTodo {...props} auth={this.props.auth} />
+          // }}
         />
 
         <Route element={<NotFound />} />
