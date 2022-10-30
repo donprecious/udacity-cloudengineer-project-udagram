@@ -1,8 +1,6 @@
 import * as AWS from 'aws-sdk'
-// import * as AWSXRay from 'aws-xray-sdk'
 import { Types } from 'aws-sdk/clients/s3'
 
-// const XAWS = AWSXRay.captureAWS(AWS)
 
 export class AttachmentUtils {
   constructor(

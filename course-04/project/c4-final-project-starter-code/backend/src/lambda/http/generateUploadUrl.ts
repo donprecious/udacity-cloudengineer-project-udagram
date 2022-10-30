@@ -9,7 +9,7 @@ import {
 // import { cors, httpErrorHandler } from 'middy/middlewares'
 
 // import { getUserId } from '../utils'
-import { generateUploadUrl } from '../../helpers/todos'
+import { generateUploadUrl } from '../../business/todos'
 // import { createLogger } from '../../utils/logger'
 
 // const logger = createLogger('auth')
