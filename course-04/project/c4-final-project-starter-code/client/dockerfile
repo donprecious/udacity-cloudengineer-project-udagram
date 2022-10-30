@@ -1,0 +1,20 @@
+#baseline
+#FROM node:14-alpine AS base
+FROM node:13 AS base 
+RUN mkdir -p /home/node/app
+RUN chown -R node:node /home/node && chmod -R 770 /home/node
+WORKDIR /home/node/app
+
+# client build
+FROM base AS builder-client
+WORKDIR /home/node/app
+COPY --chown=node:node . ./
+USER node
+RUN npm cache clean --force
+RUN npm i 
+RUN npm update --save --force
+RUN npm audit fix --legacy-peer-deps
+RUN npm install --save-dev
+# RUN npm install --loglevel warn
+EXPOSE 3000
+CMD ["npm", "start"]

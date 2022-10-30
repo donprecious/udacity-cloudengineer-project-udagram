@@ -1,9 +1,9 @@
-import { AttachmentUtils } from './attachmentUtils'
+import { AttachmentUtils } from '../helpers/attachmentUtils'
 import { TodoItem } from '../models/TodoItem'
 import { CreateTodoRequest } from '../requests/CreateTodoRequest'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 
-import { ToDoAccess } from './todosAcess'
+import { ToDoAccess } from '../data-access/todosAcess'
 import { parseUserId } from '../auth/utils'
 import { TodoUpdate } from '../models/TodoUpdate'
 

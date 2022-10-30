@@ -9,7 +9,7 @@ import {
 // import { cors, httpErrorHandler } from 'middy/middlewares'
 
 import { getUserId } from '../utils'
-import { deleteToDo } from '../../helpers/todos'
+import { deleteToDo } from '../../business/todos'
 
 // export const handler = middy(
 //   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {

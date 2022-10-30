@@ -1,37 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Auth from './auth/Auth'
-import { Router, Route, Routes } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 import Callback from './components/Callback'
-// import createHistory from 'history/createBrowserHistory'
-import { createBrowserHistory, History } from 'history'
-const history = createBrowserHistory()
+import createHistory from 'history/createBrowserHistory'
+import App from './App';
+const history = createHistory()
 
 const auth = new Auth(history)
 
-// const handleAuthentication = (props: any) => {
-//   const location = props.location
-//   if (/access_token|id_token|error/.test(location.hash)) {
-//     auth.handleAuthentication()
-//   }
-// }
+const handleAuthentication = (props: any) => {
+  const location = props.location
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication()
+  }
+}
 
 export const makeAuthRouting = () => {
   return (
-    <Routes>
-      <Router location={''} navigator={history}>
-        <div>
-          <Route
-            path="/callback"
-            element={<Callback />}
-            // element={(props) => {
-            //   handleAuthentication(props)
-            //   return <Callback />
-            // }}
-
-            // element={  <Callback />}
-          />
-        </div>
-      </Router>
-    </Routes>
+    <Router history={history}>
+      <div>
+        <Route
+          path="/callback"
+          render={props => {
+            handleAuthentication(props)
+            return <Callback />
+          }}
+        />
+        <Route
+          render={props => {
+            return <App auth={auth} {...props} />
+          }}
+        />
+      </div>
+    </Router>
   )
 }

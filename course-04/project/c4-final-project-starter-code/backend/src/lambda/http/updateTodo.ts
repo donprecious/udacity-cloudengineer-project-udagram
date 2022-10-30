@@ -10,7 +10,7 @@ import {
 
 import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
 import { getUserId } from '../utils'
-import { updateToDo } from '../../helpers/todos'
+import { updateToDo } from '../../business/todos'
 
 export const handler: APIGatewayProxyHandler = async (
   event: APIGatewayProxyEvent
